@@ -2,8 +2,7 @@ plugins {
     id "java-library"
     id "scala"
     id "maven-publish"
-    id 'fabric-loom' version '0.10.30'
-    id "com.matthewprenger.cursegradle" version "1.4.0"
+    id 'fabric-loom' version '1.7-SNAPSHOT'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -23,7 +22,7 @@ dependencies {
 
 	include(api("org.scala-lang:scala3-library_3:${project.scala_version}"))
 	// Depended on by scala3
-	include(api("org.scala-lang:scala-library:2.13.6"))
+	include(api("org.scala-lang:scala-library:2.13.14"))
 }
 
 processResources {
@@ -56,31 +55,6 @@ publishing {
 				}
 			}
 		}
-    }
-}
-
-curseforge {
-	if (ENV.CURSEFORGE_API_KEY) {
-		apiKey = ENV.CURSEFORGE_API_KEY
-	}
-
-    project {
-        id = '309275'
-        changelog = 'A changelog can be found at https://github.com/FabricMC/fabric-language-scala/commits/master'
-        releaseType = 'release'
-		addGameVersion '1.17.1'
-        addGameVersion '1.16.5'
-		addGameVersion '1.15.2'
-		addGameVersion '1.14.4'
-		addGameVersion "Fabric"
-
-        mainArtifact(file("${project.buildDir}/libs/${base.archivesBaseName}-${version}.jar")) {
-            displayName = "Fabric Language Scala $version"
-        }
-    }
-
-    options {
-        forgeGradleIntegration = false
     }
 }
 
